@@ -5,14 +5,19 @@ on:
 jobs:
  validate-part1:
    runs-on: SQL Server Management Studio 22
+   
    steps:
    - name: Checkout repository
      uses: actions/checkout@v4
-  - name: Check ERD
-  run: test  Section A - RaceDay ERD .drawio.pdf 
-  - name: Check API Endpoint Plan
-  run: test  RaceDay_API_ENDPOINT_PLAN.pdf
-  -name: Check SQL Script
-  run: test  docs/RaceDay_Database.sql
-  - name: Check README
-  run: test  README.md
+     
+   - name: Check ERD
+     run: test  Section A - RaceDay ERD .drawio.pdf 
+     
+   - name: Check API Endpoint Plan
+     run: test  RaceDay_API_ENDPOINT_PLAN.pdf
+     
+   - name: Check SQL Script
+    run: test RaceDay_Database.sql
+    
+   - name: Check README
+     run: test  README.md
