@@ -19,3 +19,4 @@ RaceDay is a database management system that is designed to help organizer's kee
 
 ## YouTube Presentation
 YouTube Link:
+https://youtu.be/_F7MUTXtwGs
