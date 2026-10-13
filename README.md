@@ -10,9 +10,12 @@ RaceDay is a database management system that is designed to help organizer's kee
 - -MySQL Script
 
 ## Repo structure
--ERD Pdf file 
--API pdf
--MySql Code
+-github/workflows
+-RaceDay Docs:
+ERD Pdf file 
+API pdf
+MySql Code
+-README.md
 
 ## Workflow 
 <img width="1154" height="345" alt="Screenshot 2026-09-04 180708" src="https://github.com/user-attachments/assets/5087108b-4f43-475e-b531-2a713f33f7b9" />
