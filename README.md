@@ -9,7 +9,7 @@ RaceDay is a database management system that is designed to help organizer's kee
 - API Endpoint Plan
 - -MySQL Script
 
-## Repo structure
+## Repo structure(UPDATED)
 -github/workflows
 -RaceDay Docs:
 ERD Pdf file 
@@ -23,3 +23,10 @@ MySql Code
 ## YouTube Presentation
 YouTube Link:
 https://youtu.be/_F7MUTXtwGs
+
+# Part 2 Repo structure ADDED
+-RaceDay Api
+-Contracts
+- Xunit Test
+
+
