@@ -29,4 +29,12 @@ https://youtu.be/_F7MUTXtwGs
 -Contracts
 - Xunit Test
 
+## RaceDay Contracts
+-DTOs class created
+
+## RaceDay API
+-Model folder created and classes added
+-Date Folder created
+- 
+
 
