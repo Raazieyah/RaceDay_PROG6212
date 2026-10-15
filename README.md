@@ -34,7 +34,7 @@ https://youtu.be/_F7MUTXtwGs
 
 ## RaceDay API
 -Model folder created and classes added
--Date Folder created
-- 
+-Data Folder created and updated
+- DB context created and session mangaement added
 
 
