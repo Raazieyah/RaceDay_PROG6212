@@ -39,5 +39,6 @@ https://youtu.be/_F7MUTXtwGs
 -Program.cs updated
 -Data Folder created and corrected
 -DB context created and session mangaement added
+-Control folder created and files added
 
-
+## YouTube Link Part 2:
