@@ -34,6 +34,8 @@ https://youtu.be/_F7MUTXtwGs
 
 ## RaceDay API
 -Model folder created and classes added
+-Data file created and items added
+-Program.cs updated
 -Data Folder created and updated
 - DB context created and session mangaement added
 
