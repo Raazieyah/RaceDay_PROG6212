@@ -1,40 +1,43 @@
-﻿using System;
+﻿using RaceDay.Models;
+using Events.Models;
+using Organiser.Models;
+using Participant.Models;
 using Microsoft.EntityFrameworkCore;
-{
-    
-}
+
 
 namespace EFModeling.EntityProperties.FluentAPI.Required;
  //RaceDayDBContext//Step 10
 {
-	public DbContext()
+	public class RaceDayDBContext : DBContext
 	{
-       // public RaceDayDbContext(DbContextOptions{}
-    public DbSet<Participants> Participants { get; set; }
-    public DbSet<Event> Events { get; set; }
-    public DbSet<Category> Category { get; set; }
-    public DbSet<Enrolment> Enrolments { get; set; }
-    public DbSet<Result> Results { get; set; }
-    public DbSet<Organiser> Organiser { get; set; }
+
+    //tables
+    public DbSet<Participants> Participants { get; set; } = null1;
+    public DbSet<Event> Events { get; set; } = null!;
+    public DbSet<Category> Categories { get; set; } = null1;
+    public DbSet<Enrolment> Enrolments { get; set; } = null1;
+    public DbSet<Result> Results { get; set; } = null1;
+    public DbSet<Organiser> Organisers { get; set; } = null1;
 
     #region Required
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
     base.OnModelCreating(modelBuilder);
+
     //one organiser = many eventd
     modelBuilder.Entity<Event>()
         .HasOne(e => e.Organiser) //each event has one organiser
         .WithMany(u => u.Events) 
-        .HasForeignKey(e => e.Organiser)
-        .OnDelete(DeleteBehavior.Restrict); 
+        .HasForeignKey(e => e.OrganiserId)
+        .OnDelete(DeleteBehavior.Restrict);
 
-    modelBuilder.Entity<Category>()
-                .HasOne(c => c.Event)
-                .WithMany(e => e.Categories)
-                .HasForeignKey(c => c.EventId)
-                .OnDelete(DeleteBehavior.Cascade); // Deleting an event removes its categories
+        modelBuilder.Entity<Event>()
+                .HasOne(e => e.Category)
+                .WithMany(c => c.Events)
+                .HasForeignKey(e => e.CategoryId) 
+                .OnDelete(DeleteBehavior.Restrict); // Deleting an event removes its categories
 
-    //  One Participant = Many Enrolments
-    modelBuilder.Entity<Enrolment>()
+        //  One Participant = Many Enrolments
+        modelBuilder.Entity<Enrolment>()
         .HasOne(en => en.Participant)
         .WithMany(p => p.Enrolments)
         .HasForeignKey(en => en.ParticipantId)
@@ -47,22 +50,20 @@ namespace EFModeling.EntityProperties.FluentAPI.Required;
         .HasForeignKey(en => en.EventId)
         .OnDelete(DeleteBehavior.Restrict);
 
-    // One Category = Many Enrolments
-    modelBuilder.Entity<Enrolment>()
-        .HasOne(en => en.Category)
-        .WithMany(c => c.Enrolments)
-        .HasForeignKey(en => en.CategoryId)
-        .OnDelete(DeleteBehavior.Restrict);
+     modelBuilder.Entity<Result>()
+            .HasOne(r => r.Event)
+            .WithMany()
+            .HasForeignKey(r => r.EventId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-    // One Enrolment = Zero or One Result 
-    modelBuilder.Entity<Result>()
-        .HasOne(r => r.Enrolment)
-        .WithOne(en => en.Result)
-        .HasForeignKey<Result>(r => r.EnrolmentId)
-        .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Result>()
+            .HasOne(r => r.Participant)
+            .WithMany()
+            .HasForeignKey(r => r.ParticipantId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-    
-    modelBuilder.Entity<AppUser>() //use unique index
+
+        modelBuilder.Entity<AppUser>() //use unique index
         .HasIndex(u => u.Email)
         .IsUnique();
 
