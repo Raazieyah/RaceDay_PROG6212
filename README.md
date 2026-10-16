@@ -29,16 +29,22 @@ https://youtu.be/_F7MUTXtwGs
 -Contracts
 - Xunit Test
 
-## RaceDay Contracts
+  ## Part 2 Description
+  In part 2 we build the API points for the RaceDay system
+
+## RaceDay.Contracts
 -DTOs class created
 -Validation rules included
 
-## RaceDay API
+## RaceDay.API
 -Model folder created and classes added
 -Data file created and items added
 -Program.cs updated
 -Data Folder created and corrected
 -DB context created and session mangaement added
 -Control folder created and files added
+
+## RaceDay.Test
+-Test created
 
 ## YouTube Link Part 2:
