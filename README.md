@@ -31,6 +31,7 @@ https://youtu.be/_F7MUTXtwGs
 
 ## RaceDay Contracts
 -DTOs class created
+-Validation rules included
 
 ## RaceDay API
 -Model folder created and classes added
