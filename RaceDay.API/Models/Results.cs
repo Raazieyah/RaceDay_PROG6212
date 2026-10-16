@@ -2,14 +2,20 @@
 
 namespace Results.Models //Erd atrributes
 {
-	public Results()
+	public class Result
 	{
-        public int ResultID { get; set; }
-    public string Finishtime { get; set; }
-    public int Finishposition { get; set; }
-    public int ParticipantID { get; set; }
-    public string CatergoryType { get; set; }
+    public int ResultID { get; set; }//PRIMARY KEY
+
+    public string FinishTime { get; set; } = string.Empty;
+    public int FinishPosition { get; set; }
+
+        //foreign keys
+   // public int ParticipantID { get; set; }
+    public string CategoryType { get; set; }
     public int EventID { get; set; }
-   
+
+        //nav properties
+        public Event Event { get; set; } = null!;
+        public Participant.Models.Participant Participant { get; set; } = null!;
     }
 }
