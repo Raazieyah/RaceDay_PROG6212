@@ -37,7 +37,7 @@ https://youtu.be/_F7MUTXtwGs
 -Model folder created and classes added
 -Data file created and items added
 -Program.cs updated
--Data Folder created and updated
-- DB context created and session mangaement added
+-Data Folder created and corrected
+-DB context created and session mangaement added
 
 
