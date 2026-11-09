@@ -1,0 +1,39 @@
+﻿ @*ref view organiser*@
+
+@model List<RaceDay.Mvc.Models.CategoryDto>
+
+<h1>Event Categories</h1>
+
+<form asp-action= "AddCategory" method= "post" class= "row g-2 mb-4" >
+    < input type = "hidden" name = "EventId" value = "@ViewBag.EventId" />
+
+< div class= "col-md-4" >
+        < input name = "Name" placeholder = "Category Name (e.g., Open Men)" class= "form-control" required />
+    </ div >
+    < div class= "col-md-5" >
+        < input name = "Description" placeholder = "Category Description (e.g., Male athletes aged 18-39)" class= "form-control" required />
+    </ div >
+    < div class= "col-md-3" >
+        < button type = "submit" class= "btn btn-primary w-100" > Add Category </ button >
+    </ div >
+</ form >
+
+< table class= "table table-striped" >
+    < thead >
+        < tr >
+            < th > Category Name </ th >
+            < th > Description </ th >
+        </ tr >
+    </ thead >
+    < tbody >
+        @foreach(var cat in Model)
+        {
+            < tr >
+                < td > @cat.Name </ td >
+                < td > @cat.Description </ td >
+            </ tr >
+        }
+    </ tbody >
+</ table >
+
+

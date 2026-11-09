@@ -1,0 +1,55 @@
+﻿
+//Reference the vieworganiser-Models
+    @model List<RaceDay.Mvc.Models.OrganiserEnrolmentVm>
+
+    <h1>Event Enrolments</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Participant</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Results</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ParticipantName</td>
+                    <td>@item.CategoryName</td>
+                    <td>
+                        @if (item.Status == "Confirmed")
+                        {
+                            <span class="badge bg-success">Confirmed</span>
+                        }
+                        else if (item.Status == "Pending")
+                        {
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@item.Status</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Status == "Confirmed" && !item.HasResult)
+                        {
+                            <a asp-action="CaptureResult"
+                               asp-route-enrolmentId="@item.EnrolmentId"
+                               asp-route-eventId="@ViewBag.EventId"
+                               class="btn btn-sm btn-outline-primary">
+                                Capture Result
+                            </a>
+                        }
+                        else if (item.HasResult)
+                        {
+                            <span class="text-success fw-bold">Result Recorded</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+

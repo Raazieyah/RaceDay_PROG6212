@@ -1,0 +1,37 @@
+﻿@model RaceDay.Mvc.Models.OrganiserDashboardVm
+
+<h1>Organiser Dashboard</h1>
+<a asp-action="CreateEvent" class="btn btn-primary mb-3">+ Create New Event</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Date</th>
+            <th>Total Enrolments</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Events)
+        {
+            var isUpcoming = item.EventDate >= DateTime.Today;
+
+            <tr class="@(isUpcoming ? "table-info" : "")">
+                <td>
+                    @item.Name
+                    @if (isUpcoming)
+                    {
+                        <span class="badge bg-primary ms-2">Upcoming</span>
+                    }
+                </td>
+                <td>@item.EventDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.EnrolmentCount</td>
+                <td>
+                    <a asp-action="Enrolments" asp-route-eventId="@item.EventId" class="btn btn-sm btn-outline-secondary">Enrolments</a>
+                    <a asp-action="Categories" asp-route-eventId="@item.EventId" class="btn btn-sm btn-outline-secondary">Categories</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

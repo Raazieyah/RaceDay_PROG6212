@@ -1,0 +1,25 @@
+﻿@*//6.6 reference to views -oraginser file*@
+
+@model RaceDay.Mvc.Models.CaptureResultVm
+
+<h1>Capture Race Result</h1>
+
+<form asp-action="CaptureResult" asp-route-eventId="@ViewBag.EventId" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="EnrolmentId" />
+
+    <div class="mb-3">
+        <label asp-for="FinishTime" class="form-label">Finish Time (hh:mm:ss)</label>
+        <input asp-for="FinishTime" type="text" placeholder="00:45:30" class="form-control" />
+        <span asp-validation-for="FinishTime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="FinishingPosition" class="form-label">Finishing Position</label>
+        <input asp-for="FinishingPosition" type="number" min="1" class="form-control" />
+        <span asp-validation-for="FinishingPosition" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Result</button>
+    <a asp-action="Enrolments" asp-route-eventId="@ViewBag.EventId" class="btn btn-secondary">Cancel</a>
+</form>
