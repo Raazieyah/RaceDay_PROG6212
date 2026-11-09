@@ -1,6 +1,7 @@
 using RaceDay.API.Data;
 using RaceDayDBContext;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Models
+builder.Services.AddScoped<BlobStorageService>();// part 3.step 8.5
 
 var builder = WebApplication.CreateBuilder(args);
 
