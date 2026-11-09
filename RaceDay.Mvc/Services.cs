@@ -1,0 +1,74 @@
+﻿using System.Net.Http.Json;
+using System.Text.Json;
+
+namespace RaceDay.Mvc.Services;
+
+public class RaceDayApiClient
+{
+    private readonly IHttpClientFactory _factory;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true
+    };
+    public RaceDayApiClient(IHttpClientFactory factory, IHttpContextAccessor accessor)
+    {
+        factory = factory;
+        _httpContextAccessor = accessor;
+    }
+    private HttpClient CreateClient()
+    {
+        return _factory.CreateClient("RaceDayAPI");
+    }
+    private HttpRequestMessage CreateRequest(HttpMethod method, string url)
+    {
+        var request = new HttpRequestMessage(method, url);
+        string? apiCookie = _httpContextAccessor.HttpContext?
+            .Session.GetString("ApiSessionCookie");
+        if (!string.IsNullOrWhiteSpace(apiCookie))
+        {
+            request.Headers.TryAddWithoutValidation("Cookie", apiCookie);
+        }
+        return request;
+    }
+    public async Task<HttpResponseMessage> SendAsync(
+        HttpMethod method, string url, object? body = null)
+    {
+        var client = CreateClient();
+        using var request = CreateRequest(method, url);
+        if (body != null)
+            request.Content = JsonContent.Create(body);
+        return await client.SendAsync(request);
+    }
+    public async Task<T?> ReadAsync<T>(HttpResponseMessage response)
+    {
+        if (!response.IsSuccessStatusCode) return default;
+        string json = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<T>(json, JsonOptions);
+    }
+    public static string? ExtractSessionCookie(HttpResponseMessage response)
+    {
+        if (!response.Headers.TryGetValues("Set-Cookie", out var values))
+            return null;
+        string? sessionHeader = values.FirstOrDefault(v =>
+            v.StartsWith(".AspNetCore.Session=", StringComparison.OrdinalIgnoreCase));
+        return sessionHeader?.Split(';', 2)[0];
+    }
+
+    //step 8.7
+    public async Task<HttpResponseMessage> UploadFileAsync(string url, IFormFile file)
+    {
+        var client = _factory.CreateClient("RaceDayAPI");
+        using var request = CreateRequest(HttpMethod.Post, url);
+        using var form = new MultipartFormDataContent();
+        using var stream = file.OpenReadStream();
+        var fileContent = new StreamContent(stream);
+        fileContent.Headers.ContentType =
+            new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
+
+        form.Add(fileContent, "file", file.FileName);
+        request.Content = form;
+        return await client.SendAsync(request);
+    }
+
+}
