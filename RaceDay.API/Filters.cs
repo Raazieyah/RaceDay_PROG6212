@@ -1,4 +1,4 @@
-﻿uusing Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace RaceDay.Api.Filters
