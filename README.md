@@ -51,8 +51,15 @@ https://youtu.be/_F7MUTXtwGs
 https://youtu.be/5zoFwlzYorA
 
 # Part 3
-##
-##
+RaceDay Part 3 Mvc project created
+
+## Controller
+Controller,Event,Organiser,Partcipant controllers created.
+## Models
+Login, View,Organiser view models created.
+## Views
+Organiser and Participants files created.
+
 ## WLS :PowerShell Connected
 <img width="694" height="346" alt="Screenshot 2026-11-09 195758" src="https://github.com/user-attachments/assets/19f6cb6b-aa0c-41ec-8fa1-5c8c5245e619" />
 
@@ -61,4 +68,5 @@ https://youtu.be/5zoFwlzYorA
 
 ## YouTube Part 3 Link:
 https://youtu.be/5zoFwlzYorA
-###########
+
+
