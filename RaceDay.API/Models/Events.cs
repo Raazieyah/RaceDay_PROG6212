@@ -20,6 +20,9 @@ namespace Events.Models
 
     public Organiser Organiser { get; set; } = null!;
     public Category Category { get; set; } = null!;
+
+    //Part 3- fields added
+    public string? BannerImageUrl { get; set; }
 }
 }
 

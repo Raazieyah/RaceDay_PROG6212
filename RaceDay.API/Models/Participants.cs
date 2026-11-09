@@ -17,5 +17,7 @@ namespace Participant.Models
 
         //navigator
         public ICollection<RaceDay.Contracts.EnrolmentDto> Enrolments { get; set; } = new List<RaceDay.Contracts.EnrolmentDto>();
+
+        public string? ProfileImageUrl { get; set; //part 3
     }
 }
