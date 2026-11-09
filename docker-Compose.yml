@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  raceday-api:
+    image: raceday-api:latest
+    container_name: raceday-api-container
+    build:
+      context: ./RaceDay.API
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080" # Access API at http://localhost:5000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=raceday-db;Database=RaceDayDb;User Id=sa;Password=YourSecurePassword123!;TrustServerCertificate=True;
+      - AzureBlobStorage__ConnectionString=YOUR_AZURE_STORAGE_CONNECTION_STRING
+      - AzureBlobStorage__ContainerName=raceday-images
+    depends_on:
+      - raceday-db
+
+  raceday-mvc:
+    image: raceday-mvc:latest
+    container_name: raceday-mvc-container
+    build:
+      context: ./RaceDay.Mvc
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Access frontend web interface at http://localhost:8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ApiSettings__BaseUrl=http://raceday-api:8080/
+    depends_on:
+      - raceday-api
+
+  raceday-db:
+    image: ://microsoft.com
+    container_name: raceday-db-container
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourSecurePassword123!
