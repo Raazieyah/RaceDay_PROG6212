@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("f0377f7e-09a2-42a9-aca4-0111a1d506ef")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("RaceDay.Mvc.")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
