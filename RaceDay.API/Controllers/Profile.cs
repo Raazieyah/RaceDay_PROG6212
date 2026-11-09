@@ -61,4 +61,21 @@ public class ProfileController : ControllerBase
 
         return Ok(new { message = "Profile updated successfully." });
     }
+//part 3 8.6 profile picture endpoint
+    [HttpPost("profile-image")]
+    public async Task<IActionResult> UploadProfileImage(
+    IFormFile file, [FromServices] BlobStorageService blobStorage)
+    {
+        // Keep your existing authenticated user lookup here (e.g., via session/claims)
+        int userId = GetCurrentUserId();
+        var user = await _db.Users.FindAsync(userId);
+        if (user == null) return Unauthorized();
+
+        string url = await blobStorage.UploadAsync(file, "profile-images");
+        user.ProfileImageUrl = url;
+        await _db.SaveChangesAsync();
+
+        return Ok(new { imageUrl = url });
+    }
+
 }

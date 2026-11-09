@@ -172,4 +172,20 @@ public class EnrolmentsController : ControllerBase
 
         return Ok(new { message = "Enrolment processed successfully for Participant." });
     }
+    //Part 8.6 event banner endpoint
+    [HttpPost("{id:int}/banner")]
+    public async Task<IActionResult> UploadBanner(
+    int id, IFormFile file, [FromServices] BlobStorageService blobStorage)
+    {
+        // Keep your existing Organiser/session ownership checks here.
+        var eventItem = await _db.Events.FindAsync(id);
+        if (eventItem == null) return NotFound();
+
+        string url = await blobStorage.UploadAsync(file, "event-banners");
+        eventItem.BannerImageUrl = url;
+        await _db.SaveChangesAsync();
+
+        return Ok(new { imageUrl = url });
+    }
+
 }
